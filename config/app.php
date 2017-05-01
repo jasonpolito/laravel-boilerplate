@@ -186,6 +186,11 @@ return [
          * User roles
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
+
+        /*
+         * Social login (facebook, google, etc)
+         */
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -236,6 +241,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Twig' => TwigBridge\Facade\Twig::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
