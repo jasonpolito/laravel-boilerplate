@@ -18,5 +18,8 @@ Route::get('/', function () {
     SEO::setCanonical('https://codecasts.com.br/lesson');
     SEO::opengraph()->addProperty('type', 'articles');
     SEO::twitter()->setSite('@LuizVinicius73');
+    \JavaScript::put([
+        'TESTERS' => 'bar',
+    ]);
     return view('welcome');
 })->name('home');

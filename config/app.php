@@ -201,6 +201,16 @@ return [
          * Common SEO helpers
          */
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+
+        /*
+         * PHP to js vars
+         */
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+
+        /*
+         * Application backups
+         */
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*
