@@ -191,6 +191,11 @@ return [
          * Social login (facebook, google, etc)
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+
+        /*
+         * Media library for associating media with Eloquent models
+         */
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
     ],
 
     /*
