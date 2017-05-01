@@ -196,6 +196,11 @@ return [
          * Media library for associating media with Eloquent models
          */
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+
+        /*
+         * Common SEO helpers
+         */
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
     ],
 
     /*
@@ -247,6 +252,7 @@ return [
         'Twig' => TwigBridge\Facade\Twig::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
     ],
 
 ];

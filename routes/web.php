@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
+		SEO::setTitle('Home');
+    SEO::setDescription('This is my page description');
+    SEO::opengraph()->setUrl('http://current.url.com');
+    SEO::setCanonical('https://codecasts.com.br/lesson');
+    SEO::opengraph()->addProperty('type', 'articles');
+    SEO::twitter()->setSite('@LuizVinicius73');
     return view('welcome');
 })->name('home');
