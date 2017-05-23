@@ -1,0 +1,26 @@
+.flash {
+	display: block;
+	padding: $unit/2 $unit*.75;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	z-index: 400;
+	max-width: 100%;
+	background:$dark;
+	color: white;
+	width: 100%;
+	transition: all $anim $ease;
+	transform: translate3d(-50%, 100%, 1px);
+	&.active {
+		transform: translate3d(-50%, 0, 1px);
+	}
+	@include breakpoint($bp-sm) {
+		width: auto;
+	}
+	// @include color-loop() {
+	// 	&.#{$COLOR_NAME} {
+			// background: mix($COLOR_VALUE, white, 10%);
+			// color: mix($COLOR_VALUE, white, 20%);
+		// }
+	// }
+}

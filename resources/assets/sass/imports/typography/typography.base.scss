@@ -1,0 +1,212 @@
+html {
+    font-family           : $font-family;
+    font-size             : $font-size;
+    line-height           : $unit;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    @include font-size(1);
+    color: mix($dark, black, 100%);
+}
+
+p {
+    max-width: 600px;
+    line-height: 1.65rem;
+    min-width: $unit;
+    margin: $unit auto;
+}
+
+ol,
+ul {
+    margin: $unit 0;
+}
+
+ol li,
+ul li {
+    line-height: 1.5rem;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+    margin: 0;
+}
+
+blockquote {
+    line-height: 1.5rem;
+    margin     : $unit 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    font-family: $font-family;
+    margin     : $unit 0;
+    line-height: 1.5rem;
+}
+
+h6 {
+    font-size: 0.3535rem;
+}
+
+table {
+    margin         : $unit 0;
+    border-spacing : 0;
+    border-collapse: collapse;
+}
+
+table td,
+table th {
+    padding    : 0;
+    line-height: $unit;
+}
+
+code {
+    vertical-align: bottom;
+}
+@for $i from 1 through length($headings) {
+    $fs: nth(nth($headings, $i), 1);
+
+    h#{$i} {
+        @include font-size($fs);
+    }
+}
+$index: 1;
+@each $name, $size in $bps {
+    $index: $index + 1;
+    @include breakpoint($size) {
+         @for $i from 1 through length($headings){
+            $fs: nth(nth($headings, $i), $index);
+            @if $fs != nth(nth($headings, $i), $index - 1) {
+                h#{$i} {
+                    @include font-size($fs);
+                }
+            }
+        }
+    }
+}
+h4 {
+    padding-top: $unit;
+    margin-bottom: $unit/2;
+    + * {
+        margin-top: 0;
+    }
+}
+.subtext {
+    opacity       : 0.45;
+    @include font-size(.85);
+    line-height   : $unit/2;
+    text-transform: none;
+    display       : block;
+    letter-spacing: 0;
+}
+
+b {
+    font-weight: 900;
+}
+
+.inline-icon {
+    width         : $unit;
+    height        : $unit;
+    top: -2px;
+    display       : inline-block;
+    vertical-align: middle;
+
+    svg {
+        // top   : -2px;
+        width : 100%;
+        height: 100%;
+    }
+
+    &.small {
+        width : $unit*.75;
+        height: $unit*.75;
+    }
+    &.large {
+        width: $unit * 3;
+        height: $unit * 3;
+    }
+    &.huge {
+        width: $unit * 5;
+        height: $unit * 5;
+    }
+    @include color-loop() {
+        &.#{$COLOR_NAME} {
+            svg * {
+                fill: #{$COLOR_VALUE} !important;
+            }
+        }
+    }
+}
+
+.icon {
+    @include color-loop() {
+        &.#{$COLOR_NAME} {
+            svg {
+                fill: #{$COLOR_VALUE};
+            }
+        }
+    }
+}
+
+.link {
+    padding: 0;
+    border: 0;
+
+    appearance: none;
+    background: none;
+    font-size: inherit;
+    line-height: inherit;
+    cursor         : pointer;
+    color          : inherit;
+    text-decoration: none;
+    display        : inline-block;
+    &.inline {
+        display: inline;
+        &:hover {
+            background: rgba($primary, .1);
+        }
+        &:after {
+            display: none;
+        }
+    }
+
+    &:after {
+        content   : '';
+        position  : absolute;
+        display   : block;
+        width     : 100%;
+        height    : 1px;
+        opacity   : .1;
+        margin-top: -1px;
+        box-shadow: inset 0 $unit-base;
+        top       : 100%;
+        transition: all $anim $ease;
+    }
+
+    &:hover {
+        &:after {
+            height    : $unit-base;
+            opacity: 0.4;
+        }
+    }
+}
+
+a.basic {
+    text-decoration: none;
+    color: inherit;
+}
+
+.font-normal {
+    font-family: $font-family;
+}
+
+.font-alt {
+    font-family: $font-family-alt;
+}

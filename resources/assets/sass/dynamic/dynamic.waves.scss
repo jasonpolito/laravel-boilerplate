@@ -1,0 +1,57 @@
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    
+    .waves-ripple {
+        position: absolute;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin-top:-50px;
+        margin-left:-50px;
+        opacity: 0;
+        transition: all $anim ease-out;
+        transform: scale(0) translate(0,0);
+        pointer-events: none;
+    }
+}
+
+
+.waves-circle {
+    text-align: center;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    border-radius: 50%;
+}
+
+
+.btn {
+	.waves-ripple {
+		background: rgba(black, .1);
+	}
+    @include color-loop() {
+    	&#{$COLOR_NAME} {
+    		.waves-ripple {
+    			background: rgba(white, .4);
+    		}
+    		&.btn-simple {
+    			.waves-ripple {
+    				background: rgba($COLOR_VALUE, .3);
+    			}
+    		}
+    	}
+    	&-ripple-#{$COLOR_NAME} {
+    		.waves-ripple {
+    			background: rgba($COLOR_VALUE, .3);
+    		}
+    	}
+	}
+}

@@ -1,0 +1,102 @@
+
+$key: $unit * 2.5;
+
+#rc_phone {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	margin: $unit;
+	z-index: 999;
+	&.open {
+		background: white;
+		box-shadow: lift();
+		padding: $unit/2;
+		border-radius: $br;
+	}
+}
+.btn-keypad {
+	width: $key;
+	text-align: center;
+	border-radius: 0;
+}
+#rc_phone_content {
+	display: none;
+	width: $key * 3;
+	#rc_phone.open & {
+		display: block;
+	}
+}
+
+#rc_call_btn {
+	@include font-size(1.4);
+	line-height: $unit*2 !important;
+	height: $unit*2;
+	vertical-align: top;
+	display: inline-block;
+	border-radius: $br;
+	cursor: pointer;
+	color: inherit;
+	width: 100%;
+	text-align: inherit;
+	transition: all $anim $ease;
+  background: #37bc9b;
+  color: white;
+  &:hover, &:focus {
+  	outline: none !important;
+    background: #31a88b; }
+  &:active {
+    background: #2e9c81; }
+  &.btn-hangup {
+  	width: $unit*2;
+  	border-radius: 50%;
+    background: #bf263c;
+    &:hover, &:focus {
+      background: #aa2235; }
+    &:active {
+      background: #9d1f31; }
+  }
+	> * {
+		transition: all $anim $ease;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		line-height: $unit*2 !important;
+		width: $unit*2;
+		text-align: center;
+		margin: units(-1);
+	}
+}
+
+@keyframes rc_ringing {
+  0% { transform: scale(1) rotate(0) }
+  25% { transform: scale(1.4) rotate(24deg) }
+  50% { transform: scale(1) rotate(0) }
+  75% { transform: scale(1.4) rotate(-24deg) }
+  100% { transform: scale(1) rotate(0) }
+}
+
+.rc_phone_icon {
+	&.ringing { animation: rc_ringing $anim*2 infinite;}
+}
+
+#rc_phone_sms_input {
+	padding: units(.25);
+	height: units(5);
+	border-radius: $br;
+	// background: $dim;
+	margin-bottom: units(.25);
+	@include placeholder(true) {
+		color: inherit;
+		opacity: .4;
+		font-weight: inherit;
+		transition: all $anim/2 $ease;
+	}
+}
+
+.rc_call_session {
+	height: $unit * 10;
+}
+.rc_call_log {
+	height: $unit * 10;
+	overflow: scroll;
+}

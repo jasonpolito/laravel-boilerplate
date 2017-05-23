@@ -1,0 +1,412 @@
+body {
+  // background: #fafafa;
+	background: mix($primary, white, 1%);
+	text-shadow: 1px 1px 2px rgba($dark, .2);
+}
+
+section {
+	padding-top: $unit * 3;
+	padding-bottom: $unit * 3;
+	&.large {
+		padding-top: $unit * 6;
+		padding-bottom: $unit * 6;
+	}
+}
+
+@keyframes clip-bg {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 860px (484px * 2);
+	}
+}
+
+.clip-text {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	// letter-spacing: .05em;
+	// animation: clip-bg 60s linear infinite;
+	// background-attachment: fixed;
+	// background-repeat: repeat;
+	// background-size: 860px 484px;
+	// background-image: url(https://www.novapattern.com/wp-content/uploads/2017/03/violet-watermelon-cover.png);
+	// background-image: url(https://inspirationhut.net/wp-content/uploads/2013/08/54.jpg);
+	// background-image: url(https://inspirationhut.net/wp-content/uploads/2013/08/172.jpg);
+	// background-image: url(https://www.novapattern.com/wp-content/uploads/2017/03/english-green-cover.png);
+	background-image: url('/images/topography.png');
+}
+
+#device-svg {
+	display: inline-block;
+	vertical-align: top;
+	$size: $unit * 10;
+	width: $size;
+	height: $size;
+	@include breakpoint($bp-sm) {
+		$size: $unit * 15;
+		width: $size;
+		height: $size;
+	}
+	svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.phoneEdge,
+.tabletEdge,
+.laptopEdgeLeft,
+.laptopEdgeRight,
+.laptopBase,
+.monitorBottom,
+.monitorStand {
+	fill: $primary;
+}
+
+.monitorStandShadow {
+	fill: darken($primary, 3%);
+}
+
+.laptopTrackpad,
+.phoneCamera,
+.phoneButton,
+.tabletButton,
+.tabletCamera,
+.monitorLogo {
+	fill: darken($primary, 10%);
+}
+.monitorEdge {
+	fill: darken($primary, 20%);
+	fill: $dark;
+}
+.phoneSpeaker {
+	stroke: darken($primary, 10%);
+}
+
+.phoneScreen,
+.laptopScreen,
+.tabletContentGroupMask,
+.monitorScreen,
+.tabletScreen {
+	fill: mix($primary, white, 10%);
+}
+.contentDark {
+	fill: mix($primary, white, 50%);
+}
+.contentLight {
+	fill: mix($primary, white, 30%);
+}
+
+
+.viewport {
+	height: 100vh;
+	min-height: 100%;
+	padding: 0;
+}
+
+.panels {
+	width: 100%;
+	> div {
+		@include breakpoint($bp-sm) {
+			display: inline-block;
+			padding: 0 $unit;
+			width: 49%;
+			vertical-align: middle;
+		}
+	}
+}
+
+canvas {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+$side: 50px;
+$step: 1.25em;
+$dur: 10s;
+$easing: cubic-bezier(0.65, 0.05, 0.36, 1) reverse;
+$scale: 1, 1, 1; // less than $step
+
+.triangle {
+  $size: $unit * 10.5;
+  width: $size;
+  height: $size;
+  perspective: 0;
+  pointer-events: none;
+  user-select: none;
+  transform: scale(.8);
+  @include breakpoint($bp-sm) {
+    transform: none;
+  }
+  * {
+    position: static;
+  }
+}
+
+@function getDelay ($duration, $frames, $i) {
+  @return -$i / $frames * $duration;
+}
+
+// don't touch this
+$_cubes: 7;
+
+@mixin plane($w, $h) {
+  width: $w;
+  height: $h;
+  transform-style: preserve-3d;
+}
+  
+@mixin cube($side) {
+  transform-style: preserve-3d;
+  font-size: $side;
+  width: 1em;
+  height: 1em;
+
+  .face {
+    position: absolute;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+    
+    &::after,
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    &::before {
+      transform: rotateY(180deg) translateZ(0.5em);
+    }
+
+    &::after {
+      transform: translateZ(0.5em);
+    }
+
+    &.x {
+      transform: rotateX(90deg);
+    }
+    &.y {
+      transform: rotateY(90deg);
+    }
+  }
+}
+
+@mixin center() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.cube {
+  animation: $dur infinite $easing; //paused
+  position: absolute;
+  z-index: 2;
+  @include cube($side);
+  .x {
+    &::after, &::before {
+      background: mix($primary, white, 50%);
+    }
+  }
+  .y {
+    &::after, &::before {
+      background: $primary;
+    }
+  }
+  .z {
+    &::after, &::before {
+      background: mix($primary, white, 30%);
+    }
+  }
+}
+
+.static .cube {
+  animation-direction: normal;
+  animation-play-state: paused;
+}
+
+.part {
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+  position: absolute;
+
+  .plane {
+    @include plane(1em, 1em);
+    transform: rotateX(54.73561031724534deg) rotateZ(45deg) translate(-2 * $step, -$step); // Math.acos(1/Math.sqrt(3)) / Math.PI * 180
+    position: absolute;
+    margin: auto;
+    font-size: $side;
+    top: 0;
+    bottom: 0;
+	}
+  &:nth-child(1) {
+    left: 0%;
+    .plane {
+      right: -0.5em;
+    }
+
+    .cube {
+      animation-name: stepA;
+      @for $i from 0 through $_cubes {
+        &:nth-child(#{$i + 1}) {
+          animation-delay: getDelay($dur, $_cubes, $i);
+        }
+      }
+    }
+    .static .cube {
+      &:nth-child(1) {
+        animation-delay: getDelay($dur, $_cubes, 2);
+      }
+      &:nth-child(2) {
+        animation-delay: getDelay($dur, $_cubes, 5);
+      }
+    }
+  }
+
+  &:nth-child(2) {
+    left: 50%;
+    .plane {
+      left: -0.5em;
+    }
+    .cube {
+      animation-name: stepB;
+      @for $i from 0 through $_cubes {
+        &:nth-child(#{$i + 1}) {
+          animation-delay: getDelay($dur, $_cubes, $i);
+        }
+      }
+    }
+    .static .cube {
+      animation-delay: getDelay($dur, $_cubes, 3);
+    }
+  }
+}
+
+@keyframes stepB {
+  $x: 0;
+  $y: 0;
+  $z: 0;
+  @for $i from 0 through $_cubes {
+    #{$i / $_cubes * 100%} {
+      transform: translate3d($x * $step, $y * $step, $z * $step) scale3d($scale);
+      @if $x < 3 {
+        $x: $x + 1;
+      }
+      @else if $y < 3 {
+        $y: $y + 1;
+      }
+      @else if $z < 3 {
+        $z: $z + 1;
+      }
+    }
+  }
+}
+        
+
+@keyframes stepA {
+  $x: 0;
+  $y: -2;
+  $z: -3;
+  @for $i from 0 through $_cubes {
+    #{$i / $_cubes * 100%} {
+      transform: translate3d($x * $step, $y * $step, $z * $step) scale3d($scale);
+      @if $y < 0 {
+        $y: $y + 1;
+      }
+      @else if $z < 0 {
+        $z: $z + 1;
+      }
+      @else if $x < 3 {
+        $x: $x + 1; 
+      }
+    }
+  }
+}
+
+
+.dot {
+  position: absolute;
+  $size: $unit * 5;
+  top: 0;
+  left: 0;
+  margin: -$size/2;
+  display: block;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: $primary;
+  &-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2005.4px;
+    height: 777px;
+    $ratio: 777 / 2005.4;
+    transform: scale($unit * 12 / 2005.4px);
+    transform-origin: 0 0;
+    // width: $unit * 12;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(.9);
+  }
+}
+
+#growth-chart {
+  $ratio: 2005.4 /  777;
+  min-width: $unit * 12;
+  padding-top: percentage(777 / 2005.4);
+  margin: $unit 0 ;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    $size: $unit * 10;
+    width: $size;
+    height: $size;
+    margin: $size / -2;
+    border-radius: 9999px;
+    background: mix($primary, white, 10%);
+    animation: pulse 1s ease infinite alternate;
+  }
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    * {
+      stroke: mix($primary, white, 50%);
+      stroke-width: 20px;
+      fill: none;
+    }
+  }
+}
+
+.quote {
+  background: mix($primary, white, 10%);
+  color: $primary;
+  &.light {
+    background: mix(white, $primary, 10%);
+    color: white;
+  }
+}

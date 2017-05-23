@@ -1,0 +1,25 @@
+.container {
+	max-width: 100%;
+	padding: 0 $unit;
+	margin: 0 auto;
+	@include clearfix();
+	@include breakpoint($bp-sm) {
+		padding: 0 $unit*2;
+	}
+	@include breakpoint-loop() {
+		$size: nth($CURR_BP, 2);
+		max-width: $size;
+	}
+	&.full {
+		max-width: 100%;
+	}
+	&.medium {
+		max-width: $bp-lg;
+	}
+	&.small {
+		max-width: $bp-sm;
+	}
+	&.tiny {
+		max-width: 480px;
+	}
+}

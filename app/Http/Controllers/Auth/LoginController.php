@@ -3,37 +3,49 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use App\User;
+use App\Role;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
+    /**
+     * Show login page
+     */
+    public function index() {
+        return view('auth.login.index');
+    }
 
     /**
-     * Where to redirect users after login.
+     * Redirect the user to the google authentication page.
      *
-     * @var string
+     * @return Response
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function google()
     {
-        $this->middleware('guest')->except('logout');
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from google.
+     *
+     * @return Response
+     */
+    public function googleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        $user = User::firstOrCreate([
+            'email' => $user->getEmail(),
+            'name' => $user->getName(),
+            'password' => 'Google',
+        ]);
+
+        if (!$user->hasRole('basic')) {
+            $user->attachRole(Role::where('name', 'basic')->first());
+        }
+
+        \Auth::login($user);
+        return redirect()->route('tasks.index');
     }
 }

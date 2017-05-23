@@ -1,0 +1,10 @@
+.appbar {
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 299;
+	overflow: scroll;
+	&.fixed  { position: fixed; }
+	&.bottom { bottom: 0; }
+	&.top    { top: 0; }
+}

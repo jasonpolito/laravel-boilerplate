@@ -211,6 +211,51 @@ return [
          * Application backups
          */
         Spatie\Backup\BackupServiceProvider::class,
+
+        /**
+         * Activity logging
+         */
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
+
+        /**
+         * Helper functions
+         */
+        browner12\helpers\HelperServiceProvider::class,
+
+        /**
+         * Global app settings stored in JSON
+         */
+        'anlutro\LaravelSettings\ServiceProvider',
+
+        /**
+         * Fuzzy search models
+         */
+        TomLingham\Searchy\SearchyServiceProvider::class,
+
+        /**
+         * Avatar placeholder
+         */
+        Laravolt\Avatar\ServiceProvider::class,
+
+        /**
+         * Messaging between users
+         */
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+
+        /**
+         * Chrome debugging
+         */
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+
+        /**
+         * javascript routes
+         */
+        Lord\Laroute\LarouteServiceProvider::class,
+
+        /**
+         * Server side events
+         */
+        Sse\Laravel\SseServiceProvider::class
     ],
 
     /*
@@ -263,6 +308,9 @@ return [
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'Setting' => 'anlutro\LaravelSettings\Facade',
+        'Avatar'    => Laravolt\Avatar\Facade::class,
+        'SSE' => Sse\Laravel\Facade\SSE::class
     ],
 
 ];

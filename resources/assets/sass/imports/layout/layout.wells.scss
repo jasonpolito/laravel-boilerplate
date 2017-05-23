@@ -1,0 +1,28 @@
+.well {
+	display: block;
+	padding: 0 $unit;
+	margin: $unit 0;
+	border-radius: $br;
+	background: c(dim);
+	@include clearfix();
+	&:before {
+		content: '';
+		display: table;
+	}
+	&.small {
+		padding: $unit-sm;
+	}
+	@include color-loop() {
+		$name: nth($CURR_COLOR, 1);
+		$val: nth($CURR_COLOR, 2);
+		&.#{$name}-soft {
+			background: rgba($val, .1);
+		}
+		&.#{$name} {
+			background: $val;
+			@if lightness($val) < 60% {
+				color: white;
+			}
+		}
+	}
+}

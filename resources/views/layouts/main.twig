@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="{{ asset('css/global.css') }}?{{ 'now'|date('U') }}">
+	{% include 'layouts.partials.meta' %}
+</head>
+<body perspective="no">
+{% block content %}
+{% endblock %}
+{% include 'layouts.partials.vendor' %}
+{% include 'layouts.partials.js_vars' %}
+{% block scripts %}
+{% endblock %}
+</body>
+</html>

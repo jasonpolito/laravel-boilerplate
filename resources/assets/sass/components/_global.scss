@@ -1,0 +1,9 @@
+body {
+	margin: 0;
+}
+* {
+	position  : relative;
+	box-sizing: border-box;
+	outline   : none !important;
+	@include font-size(1);
+}

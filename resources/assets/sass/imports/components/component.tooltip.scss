@@ -1,0 +1,118 @@
+$margin: $unit-base;
+$tooltip-arr:
+	('left' 'right', 'top' 'bottom')
+	('top' 'bottom', 'left' 'right')
+;
+@mixin tooltip($sides, $pos, $size, $color: c(dark)) {
+	$side1: nth($sides, 1);
+	$side2: nth($sides, 2);
+	$pos1: nth($pos, 1);
+	$pos2: nth($pos, 2);
+	&.#{$side1},
+	&.#{$side2} {
+		margin-#{$side1}: $margin;
+		margin-#{$side2}: $margin;
+		#{$pos1}: 50%;
+		// &:before {
+		// 	#{$pos1}: 50%;
+		// 	margin-#{$pos1}: -$size;
+		// 	border-#{$pos1}: solid $size transparent;
+		// 	border-#{$pos2}: solid $size transparent;
+		// }
+		.tooltip-parent:hover &,
+		&.tooltip-visible,
+		*:active > &,
+		*:focus > &,
+		*:hover > & {
+			@if $pos1 == 'top' {
+				transform: translate3d(0,-50%,1px);
+			} @else {
+				transform: translate3d(-50%,0,1px);
+			}
+		}
+	}
+	&.#{$side1} {
+		#{$side2}: 100%;
+			@if $side1 == 'left' { transform: translate3d(-$margin,-50%,1px); }
+			@if $side1 == 'right' { transform: translate3d($margin,-50%,1px); }
+			@if $side1 == 'top' { transform: translate3d(-50%,-$margin,1px); }
+			@if $side1 == 'bottom' { transform: translate3d(-50%,$margin,1px); }
+		// &:before {
+		// 	#{$side1}: 100%;
+		// 	border-#{$side1}-width: $size;
+		// 	border-#{$side1}-color: $color;
+		// }
+	}
+	&.#{$side2} {
+		#{$side1}: 100%;
+			@if $side2 == 'left' { transform: translate3d(-$margin,-50%,1px); }
+			@if $side2 == 'right' { transform: translate3d($margin,-50%,1px); }
+			@if $side2 == 'top' { transform: translate3d(-50%,-$margin,1px); }
+			@if $side2 == 'bottom' { transform: translate3d(-50%,$margin,1px); }
+		// &:before {
+		// 	#{$side2}: 100%;
+		// 	border-#{$side2}-width: $size;
+		// 	border-#{$side2}-color: $color;
+		// }
+	}
+}
+
+.tooltip {
+	$tooltip-color: rgba(c(dark), .8);
+	$carret-size: .25;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 9999;
+	position: absolute;
+	background: $tooltip-color;
+	color: rgba(white, 1);
+	border-radius: $br;
+	letter-spacing: normal;
+	text-transform: none;
+	padding: 0 $unit-sm;
+	@include font-size(.85);
+	line-height: units(.65);
+	text-shadow: none !important;
+	pointer-events: none;
+	white-space: nowrap;
+	transition: opacity $anim ease, visibility $anim, transform $anim-fast $ease;
+	&-medium {
+		white-space: normal;
+		width: units(10);
+	}
+	&.tooltip-visible {
+		pointer-events: auto;
+	}
+	// &:before {
+	// 	content: '';
+	// 	display: block;
+	// 	position: absolute;
+	// 	border-style: solid;
+	// 	border-color: $tooltip-color;
+	// 	border-width: 0;
+	// }
+	@each $t in $tooltip-arr {
+		$sides: nth($t, 1);
+		$posit: nth($t, 2);
+		@include tooltip($sides, $posit, $carret-size, $tooltip-color);
+	}
+	.tooltip-parent:hover &,
+	&.tooltip-visible,
+	*:active > &,
+	*:focus > &,
+	*:hover > & {
+		opacity: 1;
+		visibility: visible;
+	}
+	// .tooltip-parent:active &,
+	// *:active > & {
+	// 	opacity: $subdue;
+	// 	transition: none;
+	// }
+}
+
+.tooltip {
+	img {
+		max-width: 999px;
+	}
+}

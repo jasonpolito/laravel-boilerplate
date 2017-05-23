@@ -1,0 +1,33 @@
+// COLORS
+$slate     : #212121;
+$light_grey: #f6f6f6;
+$green     : #00c853;
+$blue      : #0091ea;
+$aqua      : #3bc7d6;
+$light_blue: #00b8d4;
+$red       : #dd2c00;
+$pink      : #f7515f;
+$purple    : #282741;
+$orange    : #ff6d00;
+$gold    : #ffb300;
+
+// GLOBALS
+$primary   : $gold;
+$primary   : #03a9f4;
+$primary   : $blue;
+$primary   : #bb2250;
+$secondary : $aqua;
+$info : $aqua;
+$desaturate: 0%;
+$primary: desaturate($primary, $desaturate);
+$secondary: desaturate($secondary, $desaturate);
+$dark      : lighten(desaturate(mix($secondary, black, 25%), 45%), 0%);
+$dark      : #3c344c;
+$grey      : mix($dark, white, 5%);
+
+// $dim       : $light_grey;
+$dim       : desaturate(mix($primary, white, 7%), 25%);
+$dim       : mix($primary, white, 5%);
+$dim-secondary       : mix($secondary, white, 5%);
+$dimmer       : desaturate(darken($dim, 3%), 20%);
+$stroke-color: rgba(black, .1);

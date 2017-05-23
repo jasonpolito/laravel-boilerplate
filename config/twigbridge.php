@@ -145,7 +145,8 @@ return [
         |
         */
         'facades' => [
-            'SEO'
+            'SEO',
+            'Agent',
         ],
 
         /*

@@ -1,0 +1,7 @@
+@function c($name) {
+	@each $color in $colors {
+		@if nth($color, 1) == $name {
+			@return nth($color, 2);
+		}
+	}
+}

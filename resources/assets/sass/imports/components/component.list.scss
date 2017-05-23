@@ -1,0 +1,50 @@
+.list {
+	list-style: none;
+	padding: 0;
+	margin-top: $unit;
+	margin-bottom: $unit;
+	> li {
+		padding-top: $unit/4;
+		padding-bottom: $unit/4;
+	}
+	&.small {
+		> li {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+	&.padded {
+		> li {
+			padding-top: $unit/2;
+			padding-bottom: $unit/2;
+		}
+	}
+	&.divided {
+		> li {
+			+ li {
+				border-top: solid 1px $stroke-color;
+			}
+		}
+	}
+	&.check,
+	&.dot {
+		> li {
+			padding-left: $unit*.75;
+		}
+	}
+	&.dot {
+		> li {
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				left: 0;
+				border-radius: 999px;
+				width: $unit/4;
+				height: $unit/4;
+				background: c(dark);
+				top: $unit*.6;
+			}
+		}
+	}
+}

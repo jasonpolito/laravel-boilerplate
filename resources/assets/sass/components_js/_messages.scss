@@ -1,0 +1,25 @@
+.messages-list {
+	padding: $unit/2;
+	background: $lightgrey;
+	max-height: $unit * 12;
+	overflow: scroll;
+}
+.message {
+	text-align: right;
+	.body {
+		display: inline-block;
+		@include font-size(.8);
+		vertical-align: top;
+		background: mix($primary, white, 15%);
+		padding: $unit-base $unit-base*2;
+		margin-bottom: $unit-base * 2;
+		border-radius: $br;
+		text-align: left;
+	}
+	&.received {
+		text-align: left;
+		.body {
+			background: white;
+		}
+	}
+}

@@ -1,0 +1,43 @@
+.block {
+	display: block;
+}
+
+.fade-least {
+	opacity: 0.9;
+}
+
+.fade-less {
+	opacity: 0.8;
+}
+
+.fade {
+	opacity: 0.6;
+}
+
+.fade-more {
+	opacity: 0.4;
+}
+
+.fade-most {
+	opacity: 0.2;
+}
+
+.hide {
+	display: none;
+}
+
+.anim {
+	transition: all $anim $ease;
+}
+@include breakpoint-loop() {
+	$name: nth($CURR_BP, 1);
+	$size: nth($CURR_BP, 2);
+
+	.#{$name}-show {
+		display: initial;
+	}
+
+	.#{$name}-hide {
+		display: none;
+	}
+}

@@ -1,0 +1,189 @@
+html.modal-open {
+  overflow: hidden;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.modal-btn {
+	cursor: pointer;
+}
+
+.modal-bg,
+.modal-container {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.modal-container:after {
+  display: inline-block;
+  height: 100%;
+  margin-left: -0.05em;
+  width: 1px;
+  content: "";
+}
+
+.modal-container:after,
+.modal-wrap {
+  vertical-align: middle;
+}
+
+.modal-wrap {
+	display: inline-block;
+	margin: $unit 0;
+	text-align: left;
+	left: 2px;
+	width: 100%;
+	@include breakpoint($bp-sm) {
+		width: auto;
+	}
+	max-width: calc(100% - 5px);
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.modal-container {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: 399;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  text-align: center;
+  -webkit-overflow-scrolling: touch;
+	// transition: all $anim $ease;
+}
+
+.modal-bg {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	background: rgba(mix($primary, $dark, 20%), .65);
+	// transition: all $anim $ease;
+}
+
+.modal-content {
+	padding: $unit;
+	border-radius: $br;
+	background: white;
+	// transition: all $anim $ease;
+	transform: translate3d(0,-$unit,1px);
+	box-shadow: $raise;
+	opacity: 0;
+	@include breakpoint($bp-sm) {
+		min-width: $unit*22;
+	}
+}
+
+.modal {
+	&.medium {
+		.container {
+			max-width: $bp-sm;
+		}
+	}
+	&.drawer {
+		.container {
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			width: 100%;
+			left: 0;
+			margin: 0;
+			top: 0;
+			display: block;
+			height: 100%;
+			background:white;
+			// transition: all $anim $ease;
+		}
+		.modal-wrap {
+			top: 0;
+			position: absolute;
+			width: calc(100% - #{$unit*3});
+			left: 0;
+			bottom: 0;
+			margin: 0;
+			display: block;
+			height: 100%;
+			max-width: $unit*11;
+			@include breakpoint($bp-sm) {
+				width: $unit*11;
+			}
+		}
+		.modal-content {
+			opacity: 1;
+			padding: 0;
+			min-height: 100%;
+			// transition: all $anim $ease;
+			border-radius: 0;
+			box-shadow: none;
+			transform: none;
+		}
+		&.right {
+			.modal-wrap {
+				transform: none;
+				right: 0;
+				left: auto;
+			}
+			.container {
+				transform: translate3d(100%,0,1px);
+			}
+		}
+		&.left {
+			.modal-wrap {
+				transform: none;
+				left: 0;
+				right: auto;
+			}
+			.container {
+				transform: translate3d(-100%,0,1px);
+			}
+		}
+	}
+	.container {
+		@include breakpoint($bp-md) {
+			max-width: $bp-md;
+		}
+	}
+}
+
+
+
+.modal-control {
+	z-index: 400;
+	position: fixed;
+	appearance: none;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	visibility: hidden;
+	&:checked {
+		~ .modal-container {
+			visibility: visible;
+			pointer-events: all;
+			.modal-bg {
+				opacity: 1;
+			}
+			.container {
+				transform: translate3d(0,0,1px);
+			}
+			.modal-content {
+				transform: translate3d(0,0,1px);
+				opacity: 1;
+			}
+		}
+	}
+}
+
+
+.modal.drawer .modal-control:checked ~ .modal-container .modal-content {
+	box-shadow: rgba(0, 0, 0, 0.188235) 0px 10px 30px, rgba(0, 0, 0, 0.227451) 0px 6px 10px;
+}

@@ -1,0 +1,46 @@
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.font-thin { font-weight: 300; }
+.font-bold { font-weight: 800; }
+.font-italic { font-style: italic; }
+.font-large { font-size: 1.4em; }
+.text-uppercase { text-transform: uppercase; }
+.text-spaced { letter-spacing: .1em; }
+.text-spaced-more { letter-spacing: .2em; }
+.text-large { font-size: 1.2em; }
+.text-larger { font-size: 1.5em; }
+.text-largest { font-size: 2.5em; }
+.text-normal {@include font-size(1); }
+.text-small { font-size: .8em; line-height: 1.65em; }
+.text-tiny {font-size: .75em; line-height: $unit/2; }
+.text-nowrap { white-space: nowrap; }
+.text-underline { 
+	&:after {
+		content   : '';
+		position  : absolute;
+		display   : block;
+		width     : 100%;
+		height    : $unit-base;
+		left: 0;
+		opacity   : .2;
+		margin-top: -1px;
+		box-shadow: inset 0 $unit-base;
+		top       : 100%;
+		transition: all $anim $ease;
+	}
+}
+
+@include breakpoint-loop() {
+	$name: nth($CURR_BP, 1);
+	.#{$name}-text-left { text-align: left; }
+	.#{$name}-text-right { text-align: right; }
+	.#{$name}-text-center { text-align: center; }
+	.#{$name}-text-uppercase { text-transform: uppercase; }
+	.#{$name}-text-spaced { letter-spacing: .1em; }
+	.#{$name}-text-large { @include font-size(1.2); }
+	.#{$name}-text-normal {@include font-size(1); }
+	.#{$name}-text-small {@include font-size(.8); }
+	.#{$name}-text-tiny {@include font-size(.6); }
+	.#{$name}-text-nowrap { white-space: nowrap; }
+}

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,900|Playfair+Display');
+
+$IS_WIREFRAME   : true;
+$IS_WIREFRAME   : false;
+$DEBUG          : true;
+$DEBUG          : false;
+@if $IS_WIREFRAME {
+    $hue      : 220deg;
+    $sat      : 3%;
+    $primary  : hsl($hue, $sat, 50%);
+    $secondary: hsl($hue, $sat, 50%);
+    $dark     : hsl($hue, $sat, 30%);
+    $dim      : hsl($hue, $sat, 97%);
+}
+
+$unit-base      : 4px;
+$unit           : $unit-base * 6;
+$unit-sm        : $unit / 2;
+$unit-tn        : $unit-base * 3;
+$unit-xs        : $unit-base;
+$font-size      : $unit-base * 5;
+$font-family    : 'Playfair Display';
+$font-family-alt: 'Montserrat';
+$br             : 3px;
+$anim           : 0.3s;
+$anim-fast      : 0.2s;
+$ease           : ease;
+$bp-sm          : 600px;
+$bp-md          : 768px;
+$bp-lg          : 992px;
+$bp-xl          : 1200px;
+$bps            : ( 'sm' $bp-sm, 'md' $bp-md, 'lg' $bp-lg, 'xl' $bp-xl, );
+$colors         : ( 'white' white, 'grey' $grey, 'disabled' mix($dark, white, 5%), 'dim' $dim, 'dim-secondary' $dim-secondary, 'dimmer' $dimmer, 'primary' $primary, 'warning' $orange, 'danger' $red, 'info' $secondary, 'primary-dim' mix(black, $primary, 5%), 'secondary' $secondary, 'dark' $dark, );
+$colors-input   : ( 'white' white, 'disabled' mix($dark, white, 5%), 'primary' $primary, 'secondary' $secondary, );
+$headings       : (
+	(2.4, 3.2, 4, 4, 4.5),
+	(2, 2.4, 2.8, 3.2, 3.5),
+	(1.8, 1.8, 2, 2.2, 2.5),
+);
+$sidebar-width  : $unit*10;

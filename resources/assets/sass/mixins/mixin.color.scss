@@ -1,0 +1,18 @@
+@mixin color-loop($colors: $colors) {
+	@each $color in $colors {
+		$CURR_COLOR: $color !global;
+		$COLOR_NAME: nth($color, 1) !global;
+		$COLOR_VALUE: nth($color, 2) !global;
+		@content;
+	}
+}
+
+
+@mixin background-cover($pos: center center) {
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: $pos;
+}

@@ -1,0 +1,186 @@
+.btn {
+	appearance: none;
+	border         : 0;
+	background     : none;
+	cursor         : pointer;
+	display        : inline-block;
+	vertical-align : middle;
+	font-size      : 1rem;
+	line-height    : $unit + 2px;
+	letter-spacing : 0.1em;
+	font-family    : $font-family;
+	padding        : $unit-base*2 $unit*.75;
+	text-decoration: none;
+	text-shadow    : none;
+	text-transform : uppercase;
+	margin         : $unit 0;
+	color          : c(dark);
+	border-radius  : $br;
+	@include font-size(1);
+	transition: all $anim $ease;
+
+	circle,
+	svg path {
+		transition: all $anim $ease;
+		fill: c(dark);
+	}
+
+	&:focus,
+	&:hover {
+		background: rgba(c(dark), .05);
+	}
+
+	&.text {
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	&.small {
+		min-height: $unit;
+		// @include font-size(.8);
+		padding   : $unit-base*1.5 $unit*.75;
+
+		svg {
+			transform: scale(.9);
+		}
+	}
+
+	&.tiny {
+		@include font-size(.8);
+		padding: 0 $unit/2;
+		min-height: $unit;
+		line-height: $unit;
+		margin: 0;
+		svg {
+			transform: scale(.9);
+		}
+	}
+
+	&.full {
+		width  : 100%;
+		display: block;
+	}
+
+	&.large {
+		min-height: $unit*3;
+		@include font-size(1.3);
+		padding   : $unit $unit*2.5;
+
+		svg {
+			transform: scale(1.2);
+		}
+	}
+
+	&.round {
+		border-radius: 999px;
+	}
+
+	&.icon {
+		width          : $unit*2;
+		padding        : 0;
+		background-size: cover;
+
+		svg {
+			position: absolute;
+			top     : 50%;
+			left    : 50%;
+			transform: translate3d(-50%,-50%,1px) scale(1);
+		}
+
+		&.small {
+			width : $unit * 1.5;
+			height: $unit * 1.5;
+
+			svg {
+				transform: translate3d(-50%,-50%,1px) scale(.9);
+			}
+		}
+
+		&.large {
+			width : $unit * 3;
+			height: $unit * 3;
+		}
+	}
+	@include color-loop() {
+		$name: nth($CURR_COLOR, 1);
+		$val : nth($CURR_COLOR, 2);
+		$dark: lightness($val) < 50%;
+		@if $name == 'secondary' {
+			$dark: true;
+		}
+
+		&.#{$name}-hover {
+			&:focus,
+			&:hover {
+				color     : $val;
+				background: rgba($val, .1);
+
+				circle,
+				svg path {
+					fill: $val;
+				}
+			}
+		}
+
+		&.#{$name} {
+			background: $val;
+			@if $dark {
+				color: white;
+
+				circle,
+				svg path {
+					fill: white;
+				}
+
+				&:focus,
+				&:hover {
+					background: mix(white, $val, 8%);
+				}
+			}
+			@else {
+				// text-shadow: 0 1px rgba(white, .7);
+				&:focus,
+				&:hover {
+					background: mix(black, $val, 5%);
+				}
+				&:active {
+					background: mix(black, $val, 10%);
+				}
+			}
+
+			&.simple {
+				color     : $val;
+				background: none;
+
+				circle,
+				svg path {
+					fill: $val;
+				}
+
+				&:focus,
+				&:hover {
+					background: rgba($val, .1);
+				}
+			}
+			&.tint {
+				// color     : $val;
+				background: rgba($val, .2);
+
+				circle,
+				svg path {
+					// fill: $val;
+				}
+
+				&:focus,
+				&:hover {
+					background: rgba($val, .4);
+				}
+			}
+		}
+	}
+
+	svg {
+		top           : -1px;
+		vertical-align: middle;
+	}
+}

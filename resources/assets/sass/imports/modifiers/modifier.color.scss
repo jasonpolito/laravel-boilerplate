@@ -1,0 +1,20 @@
+.bg-cover {
+	@include background-cover();
+}
+
+@include color-loop() {
+	$name: nth($CURR_COLOR, 1);
+	$val: nth($CURR_COLOR, 2);
+	.color-#{$name} {
+		color: $val;
+	}
+	.fill-#{$name} {
+		fill: $val;
+	}
+	.bg-#{$name} {
+		background-color: $val;
+		@if lightness($val) < 60% {
+			color: white;
+		}
+	}
+}

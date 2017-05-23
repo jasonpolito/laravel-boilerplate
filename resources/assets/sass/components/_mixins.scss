@@ -1,0 +1,88 @@
+@mixin reset() {
+	appearance: none;
+	border: none;
+}
+
+@mixin clearfix() {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin breakpoint($min) {
+	@media (min-width: $min) {
+			@content;
+	}
+}
+
+@mixin breakpoint-loop($base: false) {
+	@if $base {
+		$CURR_BP    : false !global;
+		$BREAK_NAME : false !global;
+		$BREAK_SIZE : false !global;
+		@content;
+	}
+	@each $bp in $bps {
+		$CURR_BP    : $bp !global;
+		$name       : nth($bp, 1);
+		$size       : nth($bp, 2);
+		$BREAK_NAME : $name !global;
+		$BREAK_SIZE : $size !global;
+		@include breakpoint($size) {
+			@content;
+		}
+	}
+}
+
+@mixin color-loop($colors: $colors) {
+	@each $color in $colors {
+		$CURR_COLOR: $color !global;
+		$COLOR_NAME: nth($color, 1) !global;
+		$COLOR_VALUE: nth($color, 2) !global;
+		@content;
+	}
+}
+
+@mixin background-cover($pos: center center) {
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: $pos;
+}
+
+@mixin font-size($rems, $important: false) {
+	$px: $font-size * $rems;
+	$lines: 1;
+	@while $px > $unit * $lines {
+		$lines: $lines + .5;
+	}
+	font-size: $rems + rem;
+	line-height: $lines * $unit;
+}
+
+@mixin placeholder($nest: false) {
+	@if $nest {
+	  &::-webkit-input-placeholder {@content}
+	  &:-moz-placeholder           {@content}
+	  &::-moz-placeholder          {@content}
+	  &:-ms-input-placeholder      {@content}  
+	} @else {
+	  ::-webkit-input-placeholder {@content}
+	  :-moz-placeholder           {@content}
+	  ::-moz-placeholder          {@content}
+	  :-ms-input-placeholder      {@content}  
+	}
+}
+
+@mixin vcenter() {
+	position: absolute;
+	display: block;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+}

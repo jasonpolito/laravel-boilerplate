@@ -1,0 +1,388 @@
+@import 'normalize';
+
+@import 'components/variables';
+@import 'components/mixins';
+
+@import 'components/global';
+@import 'components/typography';
+@import 'components/containers';
+@import 'components/grid';
+@import 'components/flash';
+@import 'components/buttons';
+@import 'components/text_field';
+@import 'components/selects';
+@import 'components/checkboxes';
+@import 'components/tables';
+@import 'components/modals';
+@import 'components/tooltips';
+@import 'components/loader';
+@import 'components/color';
+@import 'components/stroke';
+@import 'components/padding';
+@import 'components/margin';
+@import 'components/phone';
+
+body {
+	min-height: 100vh;
+}
+
+$aside: $unit * 10;
+.aside {
+	position: fixed;
+	overflow: scroll;
+	z-index: 120;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: $aside;
+	box-shadow: -1px 0 $lightgrey;
+	transition: all $anim $ease;
+	transform: translate3d(100%,0,0);
+	.sidebar-open & {
+		transform: translate3d(0,0,0);
+	}
+	.aside-actions {
+		@include clearfix();
+		a {
+			display: block;
+			height: $unit-base * 22 - 1px;
+			float: left;
+			width: 50%;
+		}
+	}
+}
+$sbw: $unit * 4;
+@include breakpoint($bp-sm) {
+	aside {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: $sbw;
+		z-index: 10;
+	}
+	main {
+		padding-left: $sbw;
+		transition: all $anim $ease;
+		.sidebar-open & {
+			padding-right: $aside;
+		}
+	}
+}
+
+.timer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	display: block;
+	padding: $unit/4 $unit/2;
+	font-weight: bold;
+	background: red;
+	color: white;
+}
+
+.svg-icon {
+	display: inline-block;
+	vertical-align: top;
+	&.overlay {
+		position: absolute;
+		left: 0;
+		&.add {
+			top: 0;
+			transform: scale(.8);
+		}
+	}
+	@include color-loop() {
+		&.#{$COLOR_NAME} {
+			fill: $COLOR_VALUE;
+		}
+	}
+}
+
+.ajax-request {
+	pointer-events: none;
+}
+
+.ajax-request,
+.form-processing {
+	.loader-wrap {
+		opacity: 1;
+	}
+}
+
+.ajax-request {
+	main {
+		// opacity: .8;
+	}
+}
+
+.ajax-form-request {
+	.loader-wrap.page {
+		display: none;
+	}
+}
+
+.loader-wrap {
+	z-index: 398;
+	pointer-events: none;
+	opacity: 0;
+	// transition: all $anim $ease;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(white, .8);
+	&.page {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+	> div {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		transform: translate3d(0,-50%,1px);
+		text-align: center;
+	}
+}
+
+.text-right {
+	text-align: right;
+}
+
+.profile-img {
+	display: inline-block;
+	margin-right: $unit/2;
+	border-radius: 999px;
+	vertical-align: top;
+	&.small {
+		$size: $unit;
+		width: $size;
+		height: $size;
+	}
+	&.large {
+		$size: $unit * 4;
+		width: $size;
+		height: $size;
+	}
+}
+
+.fade {
+	opacity: .2;
+}
+
+.pt1 {
+	padding-top: $unit;
+}
+
+.group {
+	white-space: nowrap;
+	> * {
+		padding-left: $unit-base*2;
+		padding-right: $unit-base*2;
+		display: inline-block;
+		vertical-align: top;
+	}
+	&.v-align {
+		> * {
+			vertical-align: middle;
+		}
+	}
+}
+
+body {
+	background: $white;
+}
+
+.fill-parent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.mb0 {
+	margin-bottom: 0;
+}
+
+.reset-query {
+	position: absolute;
+	top: $unit;
+	right: 0;
+	padding: $unit-base*2;
+	fill: $primary;
+	.svg-icon {
+		transform: scale(.8);
+	}
+}
+
+.side-bar {
+	position: fixed;
+	overflow: scroll;
+	z-index: 120;
+	top: 0;
+	bottom: 0;
+	padding-left: $unit/2;
+	left: 0;
+	color: rgba(white, .8);
+	fill: rgba(white, .8);
+	background: $dark;
+	padding-top: $unit-base * 18 - 1px;
+	text-align: center;
+	box-shadow: inset (-$unit/2) 0 $unit rgba(black, .1);
+	ul {
+		padding: 0;
+		list-style: none;
+	}
+	a {
+		$size: $sbw - $unit/2;
+		padding: 0;
+		display: block;
+		width: $size;
+		border-radius: $br 0 0 $br;
+		height: $size;
+		fill: rgba(white, .2);
+		color: rgba(white, .6);
+		transition: all $anim/4 $ease;
+		&:hover {
+			color: white;
+			fill: rgba(white, .6);
+		}
+		&.active {
+			color: $dark;
+			background: $white;
+			box-shadow: -$unit $unit/4 $unit rgba(black, .4);
+		}
+		.svg-icon {
+			display: block;
+			margin-bottom: -$unit-base*2.5;
+		}
+		> span {
+			display: block;
+			width: 100%;
+			margin-top: -$unit-base;
+			@include font-size(.65);
+			@include vcenter();
+			span {
+				padding-top: $unit/2;
+				display: block;
+				@include font-size(.65);
+				line-height: $unit-base * 3;
+			}
+		}
+	}
+}
+
+@include color-loop {
+	.#{$COLOR_NAME}-on-active {
+		&.active {
+			fill: $COLOR_VALUE !important;
+		}
+	}
+}
+
+.end-of-list {
+	padding: $unit;
+	background: $lightgrey;
+	border-radius: $br;
+}
+
+header {
+	background: $primary;
+	color: white;
+	.selectize-input {
+		background:none;
+		color: white;
+		input {
+			color: white;
+			@include placeholder(true) {
+				color: rgba(white, .5) !important;
+			}
+		}
+		@include font-size(1.2);
+		padding-left: 0;
+		padding-right: 0;
+		min-width: $unit * 15;
+		max-width: 100%;
+		&.focus {
+			box-shadow: none;
+		}
+	}
+	.selectize-dropdown-content {
+		background:$dark;
+	}
+	.selectize-dropdown {
+		box-shadow: rgba($dark, 0.247059) 0px 14px 45px, rgba($dark, 0.219608) 0px 10px 18px;
+		background: $dark;
+		color: white;
+		border-radius:  $br;
+		max-height: $unit * 20;
+		$highlight: mix($primary, $dark, 20%);
+		.option {
+			background: $dark !important;
+			padding-bottom: $unit-base*5;
+			+ .option {
+				box-shadow: 0 -1px $highlight;
+			}
+			&.selected,
+			&.active {
+				background: $highlight !important;
+			}
+		}
+	}
+}
+
+.raise {
+	box-shadow: rgba($dark, 0.117647) 0px 1px 6px, rgba($dark, 0.117647) 0px 1px 4px;
+}
+
+.search-icon {
+	position: absolute;
+	left: $unit-base*5;
+	fill: $primary;
+	top: $unit + $unit-base*2;
+}
+
+.select-loading {
+	opacity: 0;
+	position: absolute;
+	right: 100%;
+	background: $primary;
+	top: $unit;
+	margin-right: $unit-base;
+	transition: all $anim $ease;
+	.loader {
+		width: $unit-base * 10;
+		transform: scale(.8);
+	}
+	svg {
+	}
+	.path {
+		stroke: white;
+	}
+	.loading ~ & {
+		opacity: 1;
+	}
+}
+
+.v-center {
+	@include vcenter();
+}
+
+
+.sidebar-control-btn {
+	position: absolute;
+	right: $unit;
+	top: $unit;
+}
+
+.pull-right {
+	float: right;
+}
+.pull-left {
+	float: left;
+}

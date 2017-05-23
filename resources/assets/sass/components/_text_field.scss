@@ -1,0 +1,151 @@
+.input-text {
+	width: 100%;
+	padding-top: $unit;
+	min-width: $unit * 10;
+	margin-bottom: $unit;
+	input[type=text],
+	input[type=email],
+	input[type=password] {
+		font-family: $font-family;
+		appearance: none;
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		padding: $unit-base*2 $unit/2;
+		border-radius: $br;
+		background: $lightgrey;
+		// box-shadow: 0 1px $grey;
+		border: 0;
+		// transition: all $anim $ease;
+		&:focus {
+			// box-shadow: 0 2px $primary;
+			background: none;
+			box-shadow: 0 0 0 1px $primary;
+			~ .label {
+				color: $primary;
+			}
+		}
+		@include placeholder(true) {
+			color: $grey;
+		}
+		@include color-loop() {
+			&.#{$COLOR_NAME} {
+				&:focus {
+					box-shadow: 0 2px $COLOR_VALUE;
+					~ .label {
+						color: $COLOR_VALUE;
+					}
+				}
+			}
+		}
+		&.has-error {
+			background: none;
+			box-shadow: 0 0 0 1px $error;
+			~ .label {
+				color: $error;
+			}
+		}
+	}
+	.label {
+		position: absolute;
+		color: mix($dark, $grey, 30%);
+		// margin-top: $unit/2;
+		top: 0;
+		left: 0;
+		@include font-size(.8);
+		transition: all $anim $ease;
+	}
+	.error-msg {
+		position: absolute;
+		top: 100%;
+		display: block;
+		color: $error;
+		@include font-size(.8);
+		margin-top: $unit-base * 1.5;
+		line-height: $unit/2;
+	}
+}
+// .input-text {
+// 	width: 100%;
+// 	padding-top: $unit;
+// 	min-width: $unit * 10;
+// 	margin-bottom: $unit;
+// 	input[type=text],
+// 	input[type=email],
+// 	input[type=password] {
+// 		font-family: $font-family;
+// 		appearance: none;
+// 		display: block;
+// 		width: 100%;
+// 		max-width: 100%;
+// 		padding: $unit*.6 0 $unit*.4;
+// 		box-shadow: 0 1px $grey;
+// 		border: 0;
+// 		transition: all $anim $ease;
+// 		&:focus {
+// 			box-shadow: 0 2px $primary;
+// 			~ .label {
+// 				color: $primary;
+// 			}
+// 		}
+// 		@include placeholder(true) {
+// 			color: $grey;
+// 		}
+// 		@include color-loop() {
+// 			&.#{$COLOR_NAME} {
+// 				&:focus {
+// 					box-shadow: 0 2px $COLOR_VALUE;
+// 					~ .label {
+// 						color: $COLOR_VALUE;
+// 					}
+// 				}
+// 			}
+// 		}
+// 		&.has-error {
+// 			box-shadow: 0 2px $error;
+// 			~ .label {
+// 				color: $error;
+// 			}
+// 		}
+// 	}
+// 	.label {
+// 		position: absolute;
+// 		color: mix($dark, $grey, 30%);
+// 		margin-top: $unit/2;
+// 		top: 0;
+// 		left: 0;
+// 		@include font-size(.8);
+// 		transition: all $anim $ease;
+// 	}
+// 	.error-msg {
+// 		position: absolute;
+// 		top: 100%;
+// 		display: block;
+// 		color: $error;
+// 		@include font-size(.8);
+// 		margin-top: $unit-base * 1.5;
+// 		line-height: $unit/2;
+// 	}
+// }
+
+.table-input {
+	appearance: none;
+	display: block;
+	max-width: 100%;
+	border: 0;
+	font-family: $font-family;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	@include font-size(1);
+	padding: $unit/2;
+	margin: 0;
+	background: white;
+	z-index: 99;
+	border-radius: $br;
+	box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
+}

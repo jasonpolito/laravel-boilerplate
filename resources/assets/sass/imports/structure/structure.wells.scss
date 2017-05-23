@@ -1,0 +1,8 @@
+.well {
+	display      : block;
+	padding      : $unit;
+	border-radius: $br;
+	@include color-loop() {
+		background: rgba($CURR_COLOR, .1);
+	}
+}

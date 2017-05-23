@@ -1,0 +1,166 @@
+@keyframes checkbox-enter {
+	 0% {
+	 	transform: scale(.5);
+	 	opacity: 0;
+	 }
+	 100% {
+	 	transform: scale(1);
+	 	opacity: 1;
+	 }
+}
+
+@keyframes checkbox-exit {
+ 0% {
+ 	transform: scale(1);
+ 	opacity: 1;
+ }
+ 100% {
+ 	transform: scale(1.5);
+ 	opacity: 0;
+ }
+}
+
+.input-radio,
+.input-checkbox {
+	display: inline-block;
+	vertical-align: middle;
+	margin: $unit/2 0;
+	user-select: none;
+	&:active {
+		opacity: .6;
+	}
+	path {
+		transition: all $anim-fast $ease;
+	}
+	&:hover {
+		path {
+			fill-opacity: 1;
+		}
+	}
+}
+
+.checkbox-indicators {
+	display: block;
+	width: $unit + $unit-xs;
+	height: $unit;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: all $anim-fast/2 $ease;
+	.unchecked {
+		fill-opacity: .4;
+	}
+}
+
+.checkbox-label {
+	padding-left: $unit + $unit-xs * 2;
+	padding-right: $unit;
+	display: inline-block;
+	vertical-align: top;
+}
+
+
+.input-radio,
+.input-checkbox {
+	input[type=radio],
+	input[type=checkbox] {
+		position: absolute;
+		opacity: 0;
+		width: 1px;
+		height: 1px;
+		left: 0;
+		top: 0;
+		appearance: none;
+		~ label {
+			cursor: pointer;
+		}
+		&:active,
+		&:focus {
+			~ .checkbox-indicators .unchecked path {
+				fill-opacity: .7;
+			}
+		}
+		&:focus {
+			~ .checkbox-indicators {
+				transform: scale(1.15);
+			}
+		}
+		~ .checkbox-indicators .checkbox-indicator {
+			display: block;
+			position: absolute;
+			left: 0;
+			top: -1px;
+			width: $unit + $unit-xs;
+			height: $unit;
+			transition: all $anim-fast $ease;
+			&:after {
+				$size: $unit * 1.25;
+				pointer-events: none;
+				opacity: 0;
+				content: '';
+				display: block;
+				width: $size;
+				height: $size;
+				margin: -$size/2;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				border-radius: 999px;
+				background: c(primary);
+			}
+			svg {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate3d(-50%,-50%,1px);
+			}
+			&.unchecked {
+				animation: checkbox-enter $anim-fast forwards;
+			}
+			&:after,
+			&.unchecked:after {
+				animation: checkbox-exit $anim*2 forwards;
+				background: rgba(black, .1);
+			}
+			&:checked:after,
+			&.checked:after {
+				animation: checkbox-enter $anim*2 forwards;
+				background: rgba($primary, .2);
+			}
+			&:checked,
+			&.checked {
+				animation: checkbox-exit $anim-fast forwards;
+				path {fill: c(primary)}
+			}
+		}
+		&:checked {
+			~ .checkbox-indicators .checkbox-indicator {
+				&.unchecked:after { animation: checkbox-enter $anim*2 forwards; }
+				&.checked {
+					animation: checkbox-enter $anim-fast forwards;
+				}
+				&.checked:after { animation: checkbox-exit $anim*2 forwards; }
+				&.unchecked {
+					animation: checkbox-exit $anim-fast forwards;
+				}
+			}
+		}
+	}
+	@include color-loop() {
+		$name: nth($CURR_COLOR, 1);
+		$val: nth($CURR_COLOR, 2);
+		&.#{$name} {
+			input[type=radio],
+			input[type=checkbox] {
+				~ .checkbox-indicators .checkbox-indicator {
+					&:after {
+						background: $val;
+					}
+					&.checked {
+						path {fill: $val}
+					}
+				}
+			}
+		}
+	}
+}

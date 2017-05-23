@@ -1,0 +1,24 @@
+$bleed_props: ( 'margin', 'padding', );
+$sides: ( 'top', 'right', 'bottom', 'left', );
+$display_props: ( 'inline-block', 'block', );
+.str {
+	box-shadow: 0 0 0 1px rgba(black, .1);
+}
+@include breakpoint-loop(true) {
+	$break: if($BREAK_NAME, $BREAK_NAME + '-', '');
+	@if $break {
+		@each $side in $sides {
+			$side_prefix: str-slice($side, 0, 1);
+			.#{$break}str#{$side_prefix} {
+				border-#{$side}: solid 1px $stroke-color;
+			}
+		}
+	} @else {
+		 @each $side in $sides {
+			$side_prefix: str-slice($side, 0, 1);
+			.str#{$side_prefix} {
+				border-#{$side}: solid 1px $stroke-color;
+			}
+		}
+	}
+}

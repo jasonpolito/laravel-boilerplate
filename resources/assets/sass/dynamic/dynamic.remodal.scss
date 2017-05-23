@@ -1,0 +1,220 @@
+// @include keyframes(remodal-opening-keyframes) {
+//   from {
+//     transform: translate(0,-$unit/2);
+//     opacity: 0;
+//   }
+//   to {
+//     transform: translate(0,0);
+//     opacity: 1;
+//   }
+// }
+
+// @include keyframes(remodal-closing-keyframes) {
+//   from {
+//     transform: translate(0,0);
+//     opacity: 1;
+//   }
+//   to {
+//     transform: translate(0,$unit/2);
+//     opacity: 0;
+//   }
+// }
+
+// html.remodal-is-locked {
+//   overflow: hidden;
+//   -ms-touch-action: none;
+//   touch-action: none;
+// }
+
+// .remodal,
+// [data-remodal-id] {
+//   display: none;
+// }
+
+// .remodal-overlay {
+//   position: fixed;
+//   z-index: 500;
+//   top: -5000px;
+//   right: -5000px;
+//   bottom: -5000px;
+//   left: -5000px;
+//   display: none;
+// }
+
+// .remodal-wrapper {
+//   position: fixed;
+//   z-index: 510;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   display: none;
+//   overflow: auto;
+//   text-align: center;
+//   -webkit-overflow-scrolling: touch;
+// }
+
+// .remodal-wrapper:after {
+//   display: inline-block;
+//   height: 100%;
+//   margin-left: -0.05em;
+//   content: "";
+// }
+
+// .remodal-overlay,
+// .remodal-wrapper {
+//   -webkit-backface-visibility: hidden;
+//   backface-visibility: hidden;
+// }
+
+
+// .remodal {
+//   position: relative;
+//   text-align: left;
+//   outline: none;
+//   -webkit-text-size-adjust: 100%;
+//   -moz-text-size-adjust: 100%;
+//   -ms-text-size-adjust: 100%;
+//   text-size-adjust: 100%;
+//   &.cover {
+//     width: 100% !important;
+//     max-width: 100% !important;
+//     border-radius: 0;
+//   }
+// }
+
+// .remodal-is-initialized {
+//   display: inline-block;
+// }
+
+// .remodal-overlay {
+//   background: rgba(black, .6);
+//   opacity: 0;
+//   @include transition(opacity $anim $ease);
+// }
+
+// .remodal-overlay.remodal-is-opening,
+// .remodal-overlay.remodal-is-opened {
+//   opacity: 1;
+// }
+
+// .remodal-overlay.remodal-is-opening,
+// .remodal-overlay.remodal-is-closing {
+//   @include animation-duration(2s);
+//   @include animation-fill-mode(forwards);
+// }
+
+// .remodal-wrapper {
+//   &.remodal--cover {
+//     padding: 0;
+//   }
+// }
+
+// .remodal {
+//   pointer-events: all;
+//   width: 100%;
+//   transform: translate3d(0,0,0);
+// }
+
+// .remodal.remodal-is-opening,
+// .remodal.remodal-is-closing {
+//   @include animation-duration($anim);
+//   @include animation-fill-mode(forwards);
+// }
+
+// .remodal.remodal-is-opening {
+//   @include animation-name(remodal-opening-keyframes);
+// }
+
+// .remodal.remodal-is-closing {
+//   @include animation-name(remodal-closing-keyframes);
+// }
+
+// .remodal,
+// .remodal-wrapper:after {
+//   vertical-align: middle;
+// }
+
+// $sides: (
+//   'top' '0,-100%,0',
+//   'right' '100%,0,0',
+//   'bottom' '0,100%,0',
+//   'left' '-100%,0,0',
+// );
+
+// @each $side in $sides {
+//   $name: nth($side, 1);
+//   $position: nth($side, 2);
+//   @include keyframes(remodal-#{$name}-opening-keyframes) {
+//     from {
+//       transform: translate3d(#{$position});
+//       opacity: 0;
+//     }
+//     to {
+//       transform: translate3d(0,0,0);
+//       opacity: 1;
+//     }
+//   }
+//   @include keyframes(remodal-#{$name}-closing-keyframes) {
+//     from {
+//       transform: translate3d(0,0,0);
+//       opacity: 1;
+//     }
+//     to {
+//       transform: translate3d(#{$position});
+//       opacity: 0;
+//     }
+//   }
+//   .remodal.remodal--#{$name}.remodal-is-opening {
+//     @include animation-name(remodal-#{$name}-opening-keyframes);
+//   }
+
+//   .remodal.remodal--#{$name}.remodal-is-closing {
+//     @include animation-name(remodal-#{$name}-closing-keyframes);
+//   }
+// }
+
+
+// @include keyframes(remodal-overlay-opening-keyframes) {
+//   from {
+//     opacity: 0;
+//   }
+//   to {
+//     opacity: 1;
+//   }
+// }
+
+// @include keyframes(remodal-overlay-closing-keyframes) {
+//   from {
+//     opacity: 1;
+//   }
+//   to {
+//     opacity: 0;
+//   }
+// }
+
+// @include breakpoint($bp-sm) {
+//   .remodal {
+//     max-width: $bp-md;
+//   }
+// }
+
+// .lt-ie9 .remodal-overlay {
+//   background: #2b2e38;
+// }
+
+// .lt-ie9 .remodal {
+//   width: 700px;
+// }
+
+// .modal {
+//   @include clearfix();
+//   padding: 0 $unit;
+//   border-radius: $br;
+//   background: white;
+//   &-title {
+//     padding-top: $unit;
+//     margin-bottom: $unit;
+//     @include font-size(1.8);
+//   }
+// }

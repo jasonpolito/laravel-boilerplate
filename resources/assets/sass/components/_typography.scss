@@ -1,0 +1,78 @@
+* {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+html {
+    font-family: $font-family;
+    font-size: $font-size;
+    line-height: $unit;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    color: $dark;
+    @include font-size(1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0 0 $unit;
+}
+
+h1 {
+    font-family: 'Roboto Slab';
+}
+
+h4 {
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+@for $i from 1 through length($headings) {
+    $fs: nth(nth($headings, $i), 1);
+    h#{$i} {
+        @include font-size($fs);
+    }
+}
+$index: 1;
+@each $name, $size in $bps {
+    $index: $index + 1;
+    @include breakpoint($size) {
+         @for $i from 1 through length($headings){
+            $fs: nth(nth($headings, $i), $index);
+            @if $fs != nth(nth($headings, $i), $index - 1) {
+                h#{$i} {
+                    @include font-size($fs);
+                }
+            }
+        }
+    }
+}
+
+a {
+    color: $primary;
+    text-decoration: none;
+    &:hover {
+        color: mix(black, $primary, 20%);
+    }
+}
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+@include breakpoint-loop() {
+    .#{$BREAK_NAME}-text-left { text-align: left; }
+    .#{$BREAK_NAME}-text-right { text-align: right; }
+    .#{$BREAK_NAME}-text-center { text-align: center; }
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

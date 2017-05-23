@@ -1,0 +1,80 @@
+table {
+	width: 100%;
+	&.padded {
+		> tbody > tr > td {
+			padding-top: $unit/4;
+			padding-bottom: $unit/4;
+		}
+		&.small {
+			> tbody > tr > td {
+				padding-top: $unit-base;
+				padding-bottom: $unit-base;
+			}
+		}
+	}
+	&.divided {
+		> tbody > tr + tr {
+			box-shadow: 0 -1px rgba(black, .1);
+		}
+	}
+	&.striped {
+		.btn-group {
+			top: -2px;
+		}
+		> tbody > tr{
+			&:nth-child(odd) {
+				background: mix($dark, white, 3%);
+			}
+			&:hover {
+				color: mix($secondary, black, 50%);
+				background: mix($secondary, mix($dark, white, 3%), 8%);
+			}
+		}
+	}
+	&.layout {
+		margin: 0;
+		thead > tr,
+		tbody > tr {
+				> th, > td {
+				padding-left: $unit/2;
+				padding-right: $unit/2;
+			}
+		}
+		&.large {
+			thead > tr,
+			tbody > tr {
+				> th, > td {
+					padding-left: $unit;
+					padding-right: $unit;
+				}
+			}
+		}
+		&.small {
+			thead > tr,
+			tbody > tr {
+				> th, > td {
+					padding-left: $unit/2;
+					padding-right: $unit/2;
+				}
+			}
+		}
+		&.tiny {
+			thead > tr,
+			tbody > tr {
+				> th, > td {
+					padding-left: $unit-base;
+					padding-right: $unit-base;
+				}
+			}
+		}
+		&.zero {
+			thead > tr,
+			tbody > tr {
+				> th, > td {
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+		}
+	}
+}

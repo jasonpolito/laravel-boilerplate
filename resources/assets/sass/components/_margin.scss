@@ -1,0 +1,46 @@
+$bleed_props: ( 'margin', );
+$bleed_sides: ( 'top', 'right', 'bottom', 'left', );
+
+@include breakpoint-loop(true) {
+	$break: if($BREAK_NAME, $BREAK_NAME + '-', '');
+	@for $i from 0 through 12 {
+		 @each $prop in $bleed_props{
+			$prop_prefix: str-slice($prop, 0, 1);
+
+			.#{$break}#{$prop_prefix}#{$i} {
+				#{$prop}: $unit * $i;
+			}
+
+			.#{$break}#{$prop_prefix}-#{$i} {
+				#{$prop}: -$unit * $i;
+			}
+
+			.#{$break}#{$prop_prefix}#{$i}sm {
+				#{$prop}: $unit/2;
+			}
+
+			.#{$break}#{$prop_prefix}-#{$i}sm {
+				#{$prop}: $unit/-2;
+			}
+			@each $side in $bleed_sides {
+				$side_prefix: str-slice($side, 0, 1);
+
+				.#{$break}#{$prop_prefix}#{$side_prefix}#{$i} {
+					#{$prop}-#{$side}: $unit * $i;
+				}
+
+				.#{$break}#{$prop_prefix}#{$side_prefix}-#{$i} {
+					#{$prop}-#{$side}: $unit * -$i;
+				}
+
+				.#{$break}#{$prop_prefix}#{$side_prefix}#{$i}sm {
+					#{$prop}-#{$side}: $unit/2 * $i;
+				}
+
+				.#{$break}#{$prop_prefix}#{$side_prefix}-#{$i}sm {
+					#{$prop}-#{$side}: $unit/2 * -$i;
+				}
+			}
+		}
+	}
+}

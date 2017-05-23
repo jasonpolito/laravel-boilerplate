@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,600,700,900|Roboto+Slab');
+
+// Building blocks
+$unit-base: 3.75px;
+$unit: $unit-base * 6;
+$unit-sm: $unit * 3;
+$br: 3px;
+
+// Animations
+$anim: 0.3s;
+$anim-fast: 0.2s;
+$ease: ease;
+
+// Breakpoints
+$bp-sm: 600px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+$bps: (
+    'sm' $bp-sm,
+    'md' $bp-md,
+    'lg' $bp-lg,
+    'xl' $bp-xl
+);
+
+// Colors
+$primary: #667cad;
+$secondary: #009688;
+$warning: #ffa726;
+$error: #e53935;
+$info: #4dd0e1;
+$success: #4caf50;
+$grey: #e0e0e0;
+$white: darken(white, 0.25%);
+$lightgrey: mix($grey, white, 30%);
+$dark: mix($primary, black, 43%);
+$colors: (
+    'primary' $primary,
+    'primary2' mix(black, $primary, 10%),
+    'primary3' mix(black, $primary, 20%),
+    'primary4' mix(white, $primary, 10%),
+    'primary5' mix(white, $primary, 20%),
+    'secondary' $secondary,
+    'warning' $warning,
+    'error' $error,
+    'info' $info,
+    'success' $success,
+    'grey' $grey,
+    'lightgrey' $lightgrey,
+    'white' $white,
+    'dark' $dark,
+    'blue' #3BAFDA,
+    'green' #48CFAD,
+    'orange' #FC6E51,
+    'yellow' #F6BB42,
+    'purple' #967ADC,
+    'red' #DA4453,
+);
+
+// Typography
+$font-size: $unit-base * 4;
+$font-family: 'Roboto';
+$headings: (
+	(2, 2.4, 2.8, 3.2, 3.5),
+	(1.8, 1.8, 2, 2.2, 2.5),
+    (1.4, 1.4, 1.6, 1.8, 2),
+	(1.1, 1.2, 1.2, 1.2, 1.2),
+);
+
+// Grids
+$cols: 12;
+$gutter: $unit * 2;
+$gutter-sm: $unit;
+
+// Shadows
+$raise: 0 3px 10px 2px rgba($dark, .2);

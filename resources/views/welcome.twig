@@ -1,13 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	{{ SEO.generate()|raw }}
-</head>
-<body>
-	{% include 'layouts.partials.js_vars' %}
+{% extends 'layouts.main' %}
+{% block content %}
+	<section class="viewport bg-dim">
+		{# <div class="v-center">
+			<img src="/images/splash.png">
+		</div> #}
+		<h1 class="font-alt font-bold text-center text-uppercase v-center m0" {% if Agent.isMobile() %}style="margin-top: -10%"{% endif %}>
+			Award <br>
+			Winning <br>
+			<span class="color-primary">Web Design</span><br>
+			Daytona <br>
+			Beach
+		</h1>
+	</section>
+
+	<section class="viewport">
+		<div class="v-center">
+			<div class="container text-center">
+				<div class="group large reverse">
+					<div class="text-center md-text-left">
+						{% include 'svg.device' %}
+					</div>
+					<div class="">
+						<h3 class="text-center md-text-right m0">
+							<i>Websites that</i>
+							<br><b class="color-primary font-large font-alt text-uppercase inline-block" style="margin-top: .3em; margin-bottom: .2em;">perform</b><br>
+							<i class="text-underline">everywhere</i>
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="viewport bg-dim">
+		<div class="v-center">
+			<div class="container text-center">
+				<div class="group large">
+					<div>
+						{% include 'svg.growth' %}
+					</div>
+					<div>
+						<h3 class="text-center md-text-left m0">
+							<i>Measurable</i>
+							<br><b class="color-primary font-large font-alt text-uppercase inline-block" style="margin-top: .3em; margin-bottom: .2em;">results</b><br>
+							<i>with analytics</i>
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="viewport">
+		<div class="v-center">
+			<div class="container text-center">
+				<div class="group large reverse">
+					<div>
+						{% include 'triangle' %}
+					</div>
+					<div>
+						<h3 class="text-center md-text-right m0">
+							<i>Continuous</i>
+							<br><b class="color-primary font-large font-alt text-uppercase inline-block" style="margin-top: .3em; margin-bottom: .2em;">support</b><br>
+							<i>post-launch</i>
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="large">
+		<div class="container">
+			<div class="row large">
+				<div class="md6">
+					<p class="font-alt">Boldtask helped us with each step in building my perfect wedding website. They helped us plan, design, purchase &amp; set up a domain.</p>
+				</div>
+				<div class="md6">
+					<p>
+						<span class="quote text-large">
+							<i>They communicated each step of the way.</i>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block scripts %}
+	<script src="{{ asset('/js/deviceAnimation.js') }}"></script>
 	<script>
-	console.log(TESTERS)
+	var path = anime.path('#growth-chart .line');
+	var motionthing = anime({
+	  targets: '.dot',
+	  translateX: path('x'),
+	  translateY: path('y'),
+	  // scale: [
+		 //  {value: 0},
+		 //  {value: 1},
+		 //  {value: 0},
+	  // ],
+	  easing: 'linear',
+	  duration: 5000,
+	  direction: 'reverse',
+	  loop: true
+	})
 	</script>
-</body>
-</html>
+{% endblock %}

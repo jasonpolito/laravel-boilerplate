@@ -1,0 +1,65 @@
+.container {
+	max-width: 100%;
+	padding: 0 $unit;
+	margin: 0 auto;
+	&:before {
+		content: '';
+		display: table;
+		clear: both;
+	}
+	@include clearfix();
+	@include breakpoint-loop() {
+		$size: nth($CURR_BP, 2);
+		// @if $size == $bp-sm {
+		// 	padding: 0 $unit;
+		// }
+		max-width: $size;
+	}
+	&.medium {
+		max-width: $bp-lg;
+	}
+	&.small {
+		max-width: $bp-sm;
+	}
+	&.tiny {
+		max-width: 480px;
+	}
+}
+
+.group {
+	list-style: none;
+	padding: 0;
+	margin: 0 (-$unit/2);
+	> * {
+		vertical-align: middle;
+		display: inline-block;
+		padding: 0 $unit/2;
+	}
+	&.reverse {
+		direction: rtl;
+	}
+	&.large {
+		margin: 0 (-$unit);
+		> * {
+			padding: 0 $unit;
+		}
+	}
+	&.small {
+		margin: 0 (-$unit/4);
+		> * {
+			padding: 0 $unit/4;
+		}
+	}
+	&.tiny {
+		margin: 0 (-$unit-base);
+		> * {
+			padding: 0 $unit-base;
+		}
+	}
+	&.zero {
+		margin: 0 0;
+		> * {
+			padding: 0 0;
+		}
+	}
+}

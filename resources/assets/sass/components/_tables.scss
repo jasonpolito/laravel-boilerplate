@@ -1,0 +1,40 @@
+table.data {
+	width: 100%;
+	border-collapse: collapse;
+	@include font-size(1);
+	margin-bottom: $unit * 3;
+	thead {
+		font-weight: bold;
+		text-align: left;
+	}
+	th, td {
+		padding: $unit-base*2 $unit/2;
+	}
+	&.striped {
+		tbody tr:nth-child(odd) {
+			background: $lightgrey;
+		}
+	}
+	&.divided {
+		tbody tr {
+			border-top: solid 1px $lightgrey;
+		}
+	}
+	&.hover {
+		tbody tr td:hover {
+			background: $lightgrey;
+		}
+	}
+	tbody {
+		// td {
+		// 	border-top: solid 1px $grey;
+		// }
+	}
+	.table-actions {
+		opacity: 0;
+		transition: all $anim $ease;
+	}
+	tr:hover .table-actions {
+		opacity: 1;
+	}
+}

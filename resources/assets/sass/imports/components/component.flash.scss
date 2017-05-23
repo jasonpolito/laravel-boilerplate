@@ -1,0 +1,24 @@
+.flash {
+	padding: $unit/2 $unit*.75;
+	margin-bottom: $unit;
+	border-radius: $br;
+	background: rgba($primary, .1);
+	color: mix($primary, $dark, 40%);
+	box-shadow: inset 0 -1px 1px rgba($primary, .1);
+	@include color-loop() {
+		&.#{$COLOR_NAME} {
+			background: rgba($COLOR_VALUE, .1);
+			color: mix($COLOR_VALUE, $dark, 40%);
+			box-shadow: inset 0 -1px 1px rgba($COLOR_VALUE, .1);
+		}
+	}
+}
+
+.errors {
+	padding: $unit/2 $unit*.75;
+	margin-bottom: $unit;
+	border-radius: $br;
+	background: rgba($red, .1);
+	color: mix($red, $dark, 40%);
+	box-shadow: inset 0 -1px 1px rgba($red, .1);
+}

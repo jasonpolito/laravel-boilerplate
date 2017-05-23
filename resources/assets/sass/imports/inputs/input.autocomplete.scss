@@ -1,0 +1,61 @@
+.input {
+
+
+.tt-dataset {
+	border-radius: $br;
+	@include font-size(.8);
+	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+
+
+.tt-menu {
+	width: 100%;
+}
+
+.tt-suggestion {
+	padding: ($unit / 2) $unit;
+	text-align: inherit;
+	background: white;
+	color: rgba($dark, .6);
+	cursor: pointer;
+	.tt-highlight {
+		color: $dark;
+		background: $primary;
+	}
+	&:last-child {
+		border-radius: 0 0 $br $br;
+	}
+}
+
+.tt-suggestion:hover,
+.tt-cursor {
+	background: mix($primary, white, 5%);
+}
+
+
+.tt-hint[style] {
+	color: rgba($dark, .4);
+	pointer-events: none;
+	z-index: 2;
+	background: transparent !important;
+}
+
+
+@include color-loop($colors-input) {
+	$name: nth($CURR_COLOR, 1);
+	$val: nth($CURR_COLOR, 2);
+	&.#{$name} {
+		.tt-suggestion {
+			.tt-highlight {
+				background: $val;
+			}
+		}
+
+		.tt-suggestion:hover,
+		.tt-cursor {
+			background: mix($val, white, 5%);
+		}
+	}
+}
+
+}

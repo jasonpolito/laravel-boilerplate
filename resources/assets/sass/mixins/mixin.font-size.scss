@@ -1,0 +1,9 @@
+@mixin font-size($rems, $important: false) {
+	$px: $font-size * $rems;
+	$lines: 1;
+	@while $px > $unit * $lines {
+		$lines: $lines + .5;
+	}
+	font-size: $rems + rem;
+	line-height: $lines * $unit;
+}

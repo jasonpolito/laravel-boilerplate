@@ -1,0 +1,5 @@
+.input {
+	display: block;
+	@include clearfix();
+	margin: $unit/2 0 $unit;
+}

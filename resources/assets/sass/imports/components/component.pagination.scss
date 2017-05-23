@@ -1,0 +1,32 @@
+ul.pagination {
+	list-style: none;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	@include clearfix();
+	li {
+		float: left;
+		span,
+		a {
+			$size: $unit * 1.5;
+			display: block;
+			width: $size;
+			height: $size;
+			line-height: $size;
+			text-align: center;
+			text-decoration: none;
+			border-radius: $br;
+			color: inherit;
+			margin: 0;
+		}
+		a:hover {
+			background: $grey;
+		}
+		&.active {
+			background: $grey;
+			font-weight: bold;
+			color: $secondary;
+		}
+	}
+}
